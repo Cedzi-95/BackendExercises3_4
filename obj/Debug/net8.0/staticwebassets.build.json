@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "HzBpZmGlBE1TH6bTzgtZPDv5pujHnfbAql5t/v8CkZk=",
+  "Hash": "8tjWQHpYE5bUrmhWFt6YBZChP9U9gMV8j+H2SV+emA0=",
   "Source": "backendExercises3-4",
   "BasePath": "_content/backendExercises3-4",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }

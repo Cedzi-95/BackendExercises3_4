@@ -44,6 +44,8 @@ public class Program
                     break;
                     case "add-author": AddAuthor();
                     break;
+                    case "delete-author": DeleteAuthor();
+                    break;
                 default:
                     System.Console.WriteLine("you are exiting");
                     return;
@@ -68,19 +70,37 @@ public class Program
         System.Console.WriteLine("Author name has been successfully added!");
     }
 
+    private static void DeleteAuthor()
+    {
+        System.Console.WriteLine("Enter author´s ID to delete: ");
+        int AuthorId = int.Parse(Console.ReadLine()!);
+
+        using var context = new AppContext();
+        var CorrespondantAuthor = context.Authors.Where(e => e.Id == AuthorId).ToList();
+        if (CorrespondantAuthor.Any())
+        {
+            context.RemoveRange(CorrespondantAuthor);
+            context.SaveChanges();
+            System.Console.WriteLine("Specified author has been deleted!");
+        }
+        else{
+            System.Console.WriteLine("could not find author with the given id");
+        }
+    }
+
     private static void AddQuote()
     {
         System.Console.WriteLine("Enter a quote: ");
         string QuoteInput = Console.ReadLine()!;
 
-        System.Console.WriteLine("Enter auhtor name: ");
-        string AuthorName = Console.ReadLine()!;
+        System.Console.WriteLine("Enter authors ID: ");
+        int authorId = int.Parse(Console.ReadLine()!);
 
         using var context = new AppContext();
         context.Echos.Add(new Echo
         {
             Quote = QuoteInput,
-           // Author = AuthorName
+            AuthorId = authorId
         });
         context.SaveChanges();
         System.Console.WriteLine("Quote added successfully!");
@@ -101,20 +121,36 @@ public class Program
             }
         } */
 
-        //retreive quotes from database based on auhtors name
-        // System.Console.WriteLine("Enter authors name: ");
-        // string AuthorName = Console.ReadLine()!;
+     //   retreive quotes from database based on auhtors name
+        System.Console.WriteLine("Enter authors name: ");
+        string AuthorName = Console.ReadLine()!;
 
-        // using var context = new AppContext();
-        // var quotes = context.Echos.Where(e => e.Author.Equals(AuthorName)).ToList();
-        // if (quotes.Any())
-        // {
-        //     System.Console.WriteLine($"These are {AuthorName} quotes: ");
-        //     foreach( var quote in quotes)
-        //     {
-        //         System.Console.WriteLine(quote.Quote);
-        //     }
-        // }
+        using var context = new AppContext();
+
+        var quotes = context.Echos
+        .Join(
+            context.Authors,
+            echo => echo.AuthorId,
+            author => author.Id,
+            (echo, author) => new { Echo = echo, Author = author }
+        )
+        .Where(joined => joined.Author.Name == AuthorName)
+        .Select(joined => joined.Echo.Quote)
+        .ToList();
+
+        if(quotes.Any())
+        {
+            System.Console.WriteLine("Quote by " + AuthorName);
+            foreach(var quote in quotes)
+            {
+                System.Console.WriteLine($"'{quote}'");
+            }
+
+        }
+        else{
+            System.Console.WriteLine("No quote found!");
+        }
+       
     }
     private static void DeleteQuotes()
     {
