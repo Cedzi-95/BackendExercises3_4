@@ -138,3 +138,4 @@ C:\Users\cedri\OneDrive\Desktop\.NetStudies\backendExercises3-4\bin\Debug\net8.0
 C:\Users\cedri\OneDrive\Desktop\.NetStudies\backendExercises3-4\obj\Debug\net8.0\staticwebassets.build.endpoints.json
 C:\Users\cedri\OneDrive\Desktop\.NetStudies\backendExercises3-4\obj\Debug\net8.0\staticwebassets\msbuild.backendExercises3-4.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
 C:\Users\cedri\OneDrive\Desktop\.NetStudies\backendExercises3-4\bin\Debug\net8.0\RequestCounter\bruno.json
+C:\Users\cedri\OneDrive\Desktop\.NetStudies\backendExercises3-4\bin\Debug\net8.0\BackendExercies3-4\bruno.json

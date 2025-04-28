@@ -22,6 +22,7 @@ namespace CounterApp.Controllers
             return Ok( new { 
                 message = $"This request has been sent {currentCount} times.", 
                 count = currentCount
+                
             });
         }
 

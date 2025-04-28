@@ -11,7 +11,8 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         builder.Services.AddDbContext<AppContext>();
-        builder.Services.AddSingleton<CounterService>();
+        builder.Services.AddScoped<CounterService>();
+        builder.Services.AddScoped<ProductService>();
 
         builder.Services.AddControllers();
 
@@ -244,3 +245,11 @@ public class AppContext : DbContext
     }
 }
 
+// public static class ServiceCollectionExtensions
+// {
+//     public static IServiceCollection AddProductServices(this IServiceCollection services)
+//     {
+//         services.AddScoped<ProductService>();
+//         return services;
+//     }
+// }
